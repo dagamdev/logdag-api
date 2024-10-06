@@ -21,12 +21,12 @@ model User {
 model Log {
   id        String   @id @default(uuid())
   userId    String
-  groupId   String
+  groupId   String?
   content   String
   eventDate DateTime @default(now())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  group     Group    @relation(fields: [groupId], references: [id])
+  group     Group?    @relation(fields: [groupId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 }
 
