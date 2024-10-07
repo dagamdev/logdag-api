@@ -14,20 +14,21 @@ export class PrismaFilter implements ExceptionFilter {
   catch(exception: Prisma.PrismaClientKnownRequestError, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const res = ctx.getResponse<Response>()
+    const setError = handlePrismaError(res, exception)
 
     console.log('Prisma:', exception)
 
     if (exception.code === 'P2002') {
-      handlePrismaError(res, 'Duplicate entry: A record with this value already exists.', ConflictException)
+      setError('Duplicate entry: A record with this value already exists.', ConflictException)
+    } else if (exception.code === 'P2003') {
+      setError('The foreign key does not belong to any related element.', ConflictException)
+    } else if (exception.code === 'P2025') {
+      setError('The requested record was not found', NotFoundException)
+    } else {
+      res.status(500).json({
+        statusCode: 500,
+        message: 'Internal server error',
+      })
     }
-
-    if (exception.code === 'P2025') {
-      handlePrismaError(res, 'The requested record was not found', NotFoundException)
-    }
-
-    res.status(500).json({
-      statusCode: 500,
-      message: 'Internal server error',
-    });
   }
 }
