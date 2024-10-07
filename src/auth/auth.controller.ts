@@ -1,15 +1,13 @@
 import {
   Body,
   Controller,
-  Get,
+  HttpCode,
+  HttpStatus,
   NotAcceptableException,
-  Post,
-  Req,
-  UseGuards
+  Post,  
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto, RegisterAuthDto } from './auth.dto'
-import { Request } from 'express'
 
 @Controller('auth')
 export class AuthController {
@@ -20,6 +18,7 @@ export class AuthController {
     return this.auth.register(registerData)
   }
 
+  @HttpCode(HttpStatus.OK)
   @Post('login')
   async login(@Body() credentials: LoginAuthDto) {
     const user = await this.auth.validateUser(credentials)
