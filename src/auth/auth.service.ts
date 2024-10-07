@@ -4,7 +4,6 @@ import { User } from '@prisma/client'
 import * as bcrypt from 'bcryptjs'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { RegisterAuthDto } from './auth.dto'
-import { JWT_SECRET } from 'src/utils/constants'
 
 @Injectable()
 export class AuthService {
