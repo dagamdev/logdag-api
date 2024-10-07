@@ -4,7 +4,7 @@ import {
   HttpCode,
   HttpStatus,
   NotAcceptableException,
-  Post,  
+  Post
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto, RegisterAuthDto } from './auth.dto'

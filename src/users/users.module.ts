@@ -7,18 +7,15 @@ import { JwtService } from '@nestjs/jwt'
 import { ThrottlerModule } from '@nestjs/throttler'
 
 @Module({
-  providers: [
-    PrismaService,
-    UsersService,
-    AuthService,
-    JwtService
-  ],
+  providers: [PrismaService, UsersService, AuthService, JwtService],
   controllers: [UsersController],
-  imports: [ThrottlerModule.forRoot([
-    {
-      ttl: 60000,
-      limit: 2
-    }
-  ])]
+  imports: [
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 2
+      }
+    ])
+  ]
 })
 export class UsersModule {}

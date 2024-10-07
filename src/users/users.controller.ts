@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   UseGuards
 } from '@nestjs/common'
@@ -18,24 +19,27 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  @SkipThrottle({lithe: true})
+  @SkipThrottle({ lithe: true })
   getAll() {
     return this.usersService.getAll()
   }
 
   @Get(':id')
-  @SkipThrottle({medium: true})
-  getOne(@Param('id') id: string) {
+  @SkipThrottle({ medium: true })
+  getOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.getOne(id)
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUser: UpdateUserDto) {
+  update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateUser: UpdateUserDto
+  ) {
     return this.usersService.update(id, updateUser)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.remove(id)
   }
 }

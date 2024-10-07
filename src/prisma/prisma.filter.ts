@@ -19,15 +19,21 @@ export class PrismaFilter implements ExceptionFilter {
     console.log('Prisma:', exception)
 
     if (exception.code === 'P2002') {
-      setError('Duplicate entry: A record with this value already exists.', ConflictException)
+      setError(
+        'Duplicate entry: A record with this value already exists.',
+        ConflictException
+      )
     } else if (exception.code === 'P2003') {
-      setError('The foreign key does not belong to any related element.', ConflictException)
+      setError(
+        'The foreign key does not belong to any related element.',
+        ConflictException
+      )
     } else if (exception.code === 'P2025') {
       setError('The requested record was not found', NotFoundException)
     } else {
       res.status(500).json({
         statusCode: 500,
-        message: 'Internal server error',
+        message: 'Internal server error'
       })
     }
   }
