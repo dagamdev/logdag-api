@@ -1,5 +1,3 @@
-const prettierConfig = require('./.prettierrc')
-
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -25,7 +23,11 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'prettier/prettier': [
       'error',
-      ...prettierConfig
+      {
+        "singleQuote": true,
+        "trailingComma": "none",
+        "semi": false
+      }
     ]
   },
 };
