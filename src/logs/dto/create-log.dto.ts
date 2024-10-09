@@ -6,7 +6,11 @@ export class CreateLogDto {
   groupId?: string
 
   @IsString()
-  content: string
+  name: string
+
+  @IsString()
+  @IsOptional()
+  content?: string
 
   @IsOptional()
   @IsDateString()

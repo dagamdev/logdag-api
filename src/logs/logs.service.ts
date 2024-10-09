@@ -7,6 +7,7 @@ import { Prisma } from '@prisma/client'
 const selectedFields: Prisma.LogSelect = {
   id: true,
   group: true,
+  name: true,
   content: true,
   eventDate: true,
   createdAt: true,
