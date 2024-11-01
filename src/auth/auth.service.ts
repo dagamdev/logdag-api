@@ -50,4 +50,8 @@ export class AuthService {
 
     return null
   }
+
+  async getCurrent(userId: string) {
+    return await this.prisma.getUser(userId)
+  }
 }

@@ -1,13 +1,19 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   NotAcceptableException,
-  Post
+  Post,
+  Req,
+  UnauthorizedException,
+  UseGuards
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto, RegisterAuthDto } from './auth.dto'
+import { AuthGuard } from './auth.guard'
+import { Request } from 'express'
 
 @Controller('auth')
 export class AuthController {
@@ -26,5 +32,13 @@ export class AuthController {
     if (user) return this.auth.login(user)
 
     throw new NotAcceptableException('Invalid credentials')
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('current')
+  async current(@Req() { user }: Request) {
+    if (!user) throw new UnauthorizedException('User not found')
+
+    return this.auth.getCurrent(user.id)
   }
 }
