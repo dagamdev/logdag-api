@@ -5,8 +5,10 @@ import { LogsModule } from './logs/logs.module'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { PrismaModule } from './prisma/prisma.module'
 import { GroupsModule } from './groups/groups.module'
+import { AppController } from './app.controller'
 
 @Module({
+  controllers: [AppController],
   imports: [
     PrismaModule,
     AuthModule,
