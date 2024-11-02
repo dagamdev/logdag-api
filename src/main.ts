@@ -3,6 +3,8 @@ import { AppModule } from './app.module'
 import { ValidationPipe } from '@nestjs/common'
 import { PrismaFilter } from './prisma/prisma.filter'
 
+console.log(process.version)
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
