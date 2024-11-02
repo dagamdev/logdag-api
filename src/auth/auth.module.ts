@@ -5,8 +5,6 @@ import { JwtModule } from '@nestjs/jwt'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { JWT_SECRET, TOKEN_EXPIRATION_TIME } from 'src/utils/constants'
 
-console.log({ JWT_SECRET, TOKEN_EXPIRATION_TIME })
-
 @Module({
   imports: [
     JwtModule.register({
